@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Flask Basic App</title>
+        <style>
+            ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            }
+
+            li {
+            float: left;
+            }
+
+            li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+
+            li a:hover {
+            background-color: #111;
+            }
+
+          .float_right{
+          float:right
+          }
+
+          #alert_bar{
+           background-color:#F0aa20
+          }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Flask Basic App</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        {% if not logged_in %}
+        <li class="float_right"><a href="/login">Login</a></li>
+        <li class="float_right"><a href="/register">Register</a></li>
+        {% else %}
+        <li class="float_right"><a href="/logout">Log Out</a></li>
+        <li class="float_right"><a href="/profile">Profile</a></li>
+        {% endif %}
+      </ul>
+      <ul id="alert_bar">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for message in messages %}
+                    <p class="alert">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+      </ul>
+    </nav>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
+</html>
